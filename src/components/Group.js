@@ -30,6 +30,13 @@ const Group = (props) => {
     setActiveMembers(status);
   }
 
+  const searchByName = (e) => {
+    const searchTerms = e.target.value;
+    const regex = new RegExp(searchTerms, "i");
+    const filter = members.filter(member => (member['Name EN'].match(regex) || member['Name CN'].match(regex)));
+    setFilteredMembers(filter);
+  }
+
   return (
     <>
       <div className="flex justify-center mb-4">
@@ -42,6 +49,10 @@ const Group = (props) => {
             activeMembers={activeMembers}
           />)
         )}
+      </div>
+      <div className="mb-3 text-center">
+        <label htmlFor="nameSearch">姓名搜寻: </label>
+        <input type="search" id="nameSearch" className="p-1 border-2 border-blue-200 rounded" onChange={(e) => searchByName(e)}/>
       </div>
       <div className="grid md:grid-cols-5 gap-4 mx-4">
           {filteredMembers.map(member => (
