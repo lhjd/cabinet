@@ -8,6 +8,7 @@ const profile = (props) => {
       </div>
       <h1 className="text-center text-lg text-gray-800 font-bold">{props.name}</h1>
       <h2 className="text-center text-gray-800">{props.title}</h2>
+      <h2 className="text-center text-gray-800">{props.age}岁</h2>
       <h3 className={`text-center ${props.filter === props.targetFilter ? 'text-blue-500' : 'text-green-500'}`}>{props.filter}</h3>
     </div>
   );
