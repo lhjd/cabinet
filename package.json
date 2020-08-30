@@ -7,10 +7,10 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "concurrently": "^5.3.0",
+    "rc-slider": "^9.3.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3",
-    "rsuite": "^4.8.1"
+    "react-scripts": "3.4.3"
   },
   "scripts": {
     "build:css": "postcss src/styles/tailwind.css -o src/styles/main.css",

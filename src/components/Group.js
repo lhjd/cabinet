@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Profile from './Profile';
 import StatusFilter from './StatusFilter';
-
-import 'rsuite/dist/styles/rsuite-default.css';
-import { RangeSlider } from 'rsuite';
+import { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 const Group = (props) => {
 
@@ -18,7 +17,6 @@ const Group = (props) => {
       .then(res => res.json())
       .then((data) => {
         setMembers(data);
-        setFilteredMembers(data);
         const age = data.map(member => member['Age']);
         const ageMin = Math.min(...age);
         const ageMax = Math.max(...age);
@@ -29,6 +27,11 @@ const Group = (props) => {
         console.log(e);
       });
   }, [props.fetchUrl]);
+
+  useEffect(() => {
+    const filter = members.filter(member => (member['Age'] >= ageRangeFilter[0] && member['Age'] <= ageRangeFilter[1]));
+    setFilteredMembers(filter);
+  }, [ageRangeFilter]);
 
   const filterMembersFor = (status) => {
     if (status === '所有成员') {
@@ -49,8 +52,6 @@ const Group = (props) => {
 
   const filterByAge = (range) => {
     setAgeRangeFilter(range);
-    const filter = members.filter(member => (member['Age'] >= ageRangeFilter[0] && member['Age'] <= ageRangeFilter[1]));
-    setFilteredMembers(filter);
   }
 
   return (
@@ -74,7 +75,7 @@ const Group = (props) => {
         <h3 className="mr-2">年龄: </h3>
         <h3>{ageRangeFilter[0]}</h3>
         <div className="md:w-1/5 w-1/2 mx-3">
-          <RangeSlider
+          <Range
             min={ageRange[0]}
             max={ageRange[1]}
             value={ageRangeFilter}
